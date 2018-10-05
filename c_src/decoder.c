@@ -281,9 +281,10 @@ dec_string(Decoder* d, ERL_NIF_TERM* value)
         } else {
             ulen = utf8_validate(&(d->u[d->i]), d->len - d->i);
             if(ulen < 0) {
-                return 0;
+                d->i++;
+            } else {
+                d->i += ulen;
             }
-            d->i += ulen;
         }
     }
 
